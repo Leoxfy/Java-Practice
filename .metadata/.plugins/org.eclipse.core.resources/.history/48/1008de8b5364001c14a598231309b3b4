@@ -1,0 +1,8 @@
+package work2;
+
+public class LoginConnection {
+	public LoginConnection() {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

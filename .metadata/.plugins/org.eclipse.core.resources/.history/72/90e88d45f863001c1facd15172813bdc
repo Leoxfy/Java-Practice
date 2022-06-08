@@ -1,0 +1,67 @@
+package work1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Task1 {
+	Connection connection = null;
+	Statement statement = null;
+	public static void main(String[] args) {
+		new Task1();
+	}
+	public Task1() {
+		initDriver();
+		connectSql();
+		executeSql();
+		ending();
+	}
+	void initDriver() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("加载驱动成功。");
+		} catch (ClassNotFoundException e) {
+			System.out.println("加载驱动失败。");
+		}
+	}
+	void connectSql() {
+		String url = "jdbc:mysql://localhost:3306/test?"
+				+ "useSSL=false"
+				+ "&serverTimezone=UTC";
+		String user = "root";
+		String password = "123";
+		try {
+			connection = DriverManager.getConnection(url, user, password);
+			System.out.println("连接成功。");
+		} catch (SQLException e) {
+			System.out.println("连接失败。");
+		}
+	}
+	void executeSql() {
+		try {
+			statement = connection.createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String executeString = "insert into employee "
+				+ "(id, name, sex, salary) "
+				+ "values "
+				+ "(1002, 'Tom', 'male', 2600)";
+		try {
+			statement.executeUpdate(executeString);
+			System.out.println("执行成功。");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	void ending() {
+		try {
+			connection.close();
+			System.out.println("断开连接。");
+		} catch (SQLException e) {
+			System.out.println("断开连接失败。");
+		}
+	}
+}

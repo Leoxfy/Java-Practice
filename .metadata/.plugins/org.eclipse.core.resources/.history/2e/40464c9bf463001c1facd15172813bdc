@@ -1,0 +1,19 @@
+package work1;
+
+public class Task1 {
+
+	public static void main(String[] args) {
+		new Task1();
+	}
+	public Task1() {
+		initDriver();
+	}
+	void initDriver() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("加载驱动成功。");
+		} catch (ClassNotFoundException e) {
+			System.out.println("加载驱动失败。");
+		}
+	}
+}
